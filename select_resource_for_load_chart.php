@@ -18,19 +18,19 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){	
-		
+	$(document).ready(function(){
+
 		$('#CheckboxContainer :checkbox').change(function () {
 
 			var checkedCheckBoxes = $(this).parent().find(':checkbox:checked');
-			if (checkedCheckBoxes.length > 1) 
+			if (checkedCheckBoxes.length > 1)
 			{
 				this.checked = false;
 				$("#error").html("Only 1 can be checked. Please uncheck some if you want to check others... :)");
 
 
 			}
-			else if (checkedCheckBoxes.length ==0) 
+			else if (checkedCheckBoxes.length ==0)
 			{
 
 				$("#error").html("<h1>Select Atleast One Resource....!</h1>");
@@ -40,12 +40,12 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 			else {
 
 				$("#error").empty();
-					
 
-				
+
+
 			}
 		});
-		
+
 	});
 	</script>
 <style type="text/css">
@@ -63,10 +63,10 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 
 		<?php
 
-							echo"<input type='checkbox' name='r' value='WT-LAB'>WT-LAB &nbsp;&nbsp;&nbsp;";
+							echo"&nbsp;&nbsp;<input type='checkbox' name='r' value='WT-LAB'>WT-LAB &nbsp;&nbsp;&nbsp;";
 							echo"<input type='checkbox' name='r' value='CR3'>CR3 &nbsp;&nbsp;&nbsp;";
 							echo"<input type='checkbox' name='r' value='CR2'>CR2 <br><br>";
-							echo"<input type='checkbox' name='r' value='VCS'>VCS &nbsp;&nbsp;&nbsp;";
+							echo"&nbsp;&nbsp;&nbsp;<input type='checkbox' name='r' value='VCS'>VCS &nbsp;&nbsp;&nbsp;";
 							echo"<input type='checkbox' name='r' value='CR4'>CR4 &nbsp;&nbsp;&nbsp;";
 							echo"<input type='checkbox' name='r' value='MM-LAB'>MM-LAB <br><br>";
 							echo"<input type='checkbox' name='r' value='PL-LAB'>PL-LAB &nbsp;&nbsp;&nbsp;";
@@ -75,23 +75,23 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 							echo"<input type='checkbox' name='r' value='LINUX-LAB'>LINUX-LAB &nbsp;&nbsp;&nbsp;";
 							echo"<input type='checkbox' name='r' value='NETWORKING-LAB'>NETWORKING-LAB &nbsp;&nbsp;&nbsp;";
 							echo"<input type='checkbox' name='r' value='DB-LAB'>DB-LAB <br><br>";
-                    
-                    
-                
 
-              
-            
+
+
+
+
+
        ?>
 						</div>
 							<div id="error">
-								
+
 							</div>
 
 
 							<div id="submit">
 								<input type="submit" value="SUBMIT">
 							</div>
-						
+
 						</form>
 
 </center>

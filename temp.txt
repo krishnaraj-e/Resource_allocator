@@ -1,0 +1,18 @@
+							<button name="WT-LAB">WT-LAB</button>
+							<button name="CR3">CR3</button>
+							<button name="CR2">CR2</button>
+							<button name="VCS">VCS</button>
+							<button name="CR4">CR4</button>
+							<button name="MM-LAB">MM-LAB</button>
+							<button name="PL-LAB">PL-LAB</button>
+							<button name="CR5">CR5</button>
+							<button name="CR6">CR6</button>
+							<button name="LINUX-LAB">LINUX-LAB</button>
+							<button name="NETWORKING-LAB">NETWORKING-LAB</button>
+							<button name="DBL-LAB">DBL-LAB</button>
+
+
+
+
+														$query2 = "INSERT INTO `resource`(`selected_by`, `resource_name`, `date`) VALUES (`".$_SESSION['user']."`)"
+							}

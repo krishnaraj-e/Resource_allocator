@@ -1,0 +1,231 @@
+This will block the resource for entire periods.
+
+TODO
+----
+row[1] returns the Period number
+looping through the 11 resources and 8 periods
+check which is = the row[1] -> only block the particular cell
+reset the resultset
+
+
+
+<?php
+require_once 'config.php';
+session_start();
+if(!isset($_SESSION['user']) || empty($_SESSION['user']))
+{
+  header("location: index.php");
+  exit;
+}
+
+if($_POST["doj"]=="Select Day")  
+{     
+
+    header( "refresh:2;url=select_date_for_overview.php" );
+echo "<br><br><center><h2 style='color:red'>Select A Day....!</h2><h2 style='color:red'>You Are Redirecting To The Previous Page...!</h2></center>";
+}
+
+
+$_SESSION['dateForOverview']=$_POST["doj"];
+        
+        
+
+
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title><?php echo $_SESSION['dateForOverview']."-Overview";?></title>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+	
+
+
+
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+
+</style>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<?php
+if($_POST["doj"]!="Select Day")  
+{ 
+//echo $d;
+//echo "<br>".$_SESSION['yearfortimetable'];
+$sql="SELECT `resource`, `period` FROM `allocation` WHERE  day='".$_SESSION['dateForOverview']."'";
+
+$result = $conn->query($sql);
+ECHO $sql;
+
+if ($result->num_rows== 0 )
+	{
+    echo "<div class='w3-panel w3-red'>";
+    echo "<h3>Message!</h3>";
+    echo "<p>No Allocation Found For Selected Date</p>";
+    echo "</div>";
+	}
+	else
+	{
+		echo "<br><br><br><br><center><h1><b>".$_SESSION['dateForOverview']."-Overview ";
+		echo"</b></h1></center><br><br><br>";
+
+        	echo "<center><table id='customers'><tr>";
+
+        	echo "<th>P/R</th>";
+
+            echo "<th>CR2</th>";
+            echo "<th>CR3</th>";
+            echo "<th>CR4</th>";
+            echo "<th>CR5</th>";
+            echo "<th>CR6</th>";
+            echo "<th>VCS</th>";
+        	echo "<th>MM-LAB</th>";
+        	echo "<th>PL-LAB</th>";
+        	echo "<th>LINUX-LAB</th>";
+        	echo "<th>NETWORKING-LAB</th>";
+        	echo "<th>DB-L</th>";       	
+        
+       
+
+$period=array( "08:00AM - 09:00AM","09:00AM - 10:00AM","10:10AM - 11:10AM", "11:10AM - 12:10PM", "12:40PM - 01:40PM","01:40PM - 02:40PM","02:50PM - 03:50PM", "03:50PM - 04:50PM");
+
+echo "<tr>";
+for ($k=0; $k <8; $k++) { 
+	
+	echo "<td>".$period[$k]."</td>";
+
+
+for ($i=1; $i <= 11; $i++) { 
+
+
+ 
+        $sql="SELECT `resource`, `period` FROM `allocation` WHERE day='".$_SESSION['dateForOverview']."'";
+        
+$result = $conn->query($sql);
+        	
+$resultset=array("r1"=>"FREE","r2"=>"FREE","r3"=>"FREE","r4"=>"FREE","r5"=>"FREE","r6"=>"FREE","r7"=>"FREE","r8"=>"FREE","r9"=>"FREE","r10"=>"FREE","r11"=>"FREE");
+while($row=mysqli_fetch_array($result,MYSQLI_NUM)) 
+
+{
+
+    if($row[0]=="CR2")
+{
+	$resultset['r1']=$row[1];
+}
+else if($row[0]=="CR3")
+{
+	$resultset['r2']=$row[1];
+}
+else if($row[0]=="CR4")
+{
+	$resultset['r3']=$row[1];
+}
+else if($row[0]=="CR5")
+{
+	$resultset['r4']=$row[1];
+}
+else if($row[0]=="CR6")
+{
+	$resultset['r5']=$row[1];
+}
+else if($row[0]=="VCS")
+{
+	$resultset['r6']=$row[1];
+}
+else if($row[0]=="MM-LAB")
+{
+	$resultset['r7']=$row[1];
+}
+else if($row[0]=="PL-LAB")
+{
+	$resultset['r8']=$row[1];
+}
+else if($row[0]=="LINUX-LAB")
+{
+	$resultset['r9']=$row[1];
+}
+else if($row[0]=="NETWORKING-LAB")
+{
+	$resultset['r10']=$row[1];
+}
+else if($row[0]=="DB-LAB")
+{
+	$resultset['r11']=$row[1];
+}
+
+
+}
+
+
+
+	$j="r".$i;
+    if($resultset[$j]!="FREE")
+    {
+    echo "<td style='color:red'><center><b>$resultset[$j]</b></center></td>";
+    }
+    else
+    {
+      echo "<td><center>$resultset[$j]</center></td>"; 
+       
+    }
+    
+}
+
+echo "</tr>";
+}
+
+echo "</center></table>";
+
+
+echo '<br><br>';
+
+
+echo '<button class="btn btn-info btn-lg" onclick="location.href="select_year_for_time_table.php" type="button">
+     <span class="glyphicon glyphicon-repeat"></span> Check Another</button>';
+
+
+     echo '<button onclick="myFunction()" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-print"></span> Print this page</button>
+';
+    }
+}
+?>
+
+<script>
+function myFunction() {
+    window.print();
+}
+</script>
+
+</body>
+</html>

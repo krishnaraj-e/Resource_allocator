@@ -1,0 +1,373 @@
+<?php
+require_once 'config.php';
+session_start();
+$_SESSION['resource']="";
+if(!isset($_SESSION['user']) || empty($_SESSION['user']))
+{
+  header("location: index.php");
+  exit;
+}
+
+
+if($_POST["r"]=="")  
+{     
+
+    header( "refresh:2;url=it.php" );
+echo "<br><br><center><h2 style='color:red'>Select A Resource....!</h2><h2 style='color:red'>You Are Redirecting To The Previous Page...!</h2></center>";
+}
+else
+{
+	 $_SESSION['resource']=$_POST['r'];
+	 //echo $_SESSION['resource']."<br>";
+	 //echo $_SESSION['user']."<br>";
+	 //echo $_SESSION['year']."<br>";
+   $ic=0;
+	 foreach(explode('-',$_SESSION['period']) as $x => $x_value) 
+	 {
+     if($x_value=='p1' || $x_value=='p2' || $x_value=='p3' || $x_value=='p4' || $x_value=='p5' || $x_value=='p6' || $x_value=='p7' || $x_value=='p8')
+      {
+        if($_SESSION['resource']!="" && $_SESSION['date']!="" && $_SESSION['year']!="")
+        {
+      	$sql = "INSERT INTO `allocation`(`resource`, `period`, `day`, `year`, `staff`) VALUES ('" . $_SESSION['resource'] ."','".$x_value."','". $_SESSION['date']."',". $_SESSION['year'].","."'".$_SESSION['user']."')";
+        if ($conn->query($sql) === TRUE) 
+            {
+              $ic++;
+            } 
+            else 
+            {
+             echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+          } 
+          else
+          {
+            echo "You Missed Something.....!";
+          }
+      }
+      {
+        
+      }
+
+     }
+
+
+     if($ic>0)
+     {
+           echo "<BR><BR><BR><BR><BR><BR>";
+           echo "<div class='check_mark'>"; 
+           echo "<div class='sa-icon sa-success animate'>";
+          echo "<span class='sa-line sa-tip animateSuccessTip'></span>";
+          echo "<span class='sa-line sa-long animateSuccessLong'></span>";
+          echo "<div class='sa-placeholder'></div>";
+          echo "<div class='sa-fix'></div>";
+          echo "</div>";
+          echo "</div>";
+          echo "<center><h2>&nbsp;&nbsp;&nbsp;Resource Allocated</center></h2>";
+
+   }
+     }
+
+?>
+
+<html>
+<head>
+  <title>Save Resource</title>
+  <style type="text/css">
+
+.check_mark {
+  width: 80px;
+  height: 130px;
+  margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.hide{
+  display:none;
+}
+
+.sa-icon {
+  width: 80px;
+  height: 80px;
+  border: 4px solid gray;
+  -webkit-border-radius: 40px;
+  border-radius: 40px;
+  border-radius: 50%;
+  margin: 20px auto;
+  padding: 0;
+  position: relative;
+  box-sizing: content-box;
+}
+
+.sa-icon.sa-success {
+  border-color: #4CAF50;
+}
+
+.sa-icon.sa-success::before, .sa-icon.sa-success::after {
+  content: '';
+  -webkit-border-radius: 40px;
+  border-radius: 40px;
+  border-radius: 50%;
+  position: absolute;
+  width: 60px;
+  height: 120px;
+  background: white;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.sa-icon.sa-success::before {
+  -webkit-border-radius: 120px 0 0 120px;
+  border-radius: 120px 0 0 120px;
+  top: -7px;
+  left: -33px;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform-origin: 60px 60px;
+  transform-origin: 60px 60px;
+}
+
+.sa-icon.sa-success::after {
+  -webkit-border-radius: 0 120px 120px 0;
+  border-radius: 0 120px 120px 0;
+  top: -11px;
+  left: 30px;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform-origin: 0px 60px;
+  transform-origin: 0px 60px;
+}
+
+.sa-icon.sa-success .sa-placeholder {
+  width: 80px;
+  height: 80px;
+  border: 4px solid rgba(76, 175, 80, .5);
+  -webkit-border-radius: 40px;
+  border-radius: 40px;
+  border-radius: 50%;
+  box-sizing: content-box;
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  z-index: 2;
+}
+
+.sa-icon.sa-success .sa-fix {
+  width: 5px;
+  height: 90px;
+  background-color: white;
+  position: absolute;
+  left: 28px;
+  top: 8px;
+  z-index: 1;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.sa-icon.sa-success.animate::after {
+  -webkit-animation: rotatePlaceholder 4.25s ease-in;
+  animation: rotatePlaceholder 4.25s ease-in;
+}
+
+.sa-icon.sa-success {
+  border-color: transparent\9;
+}
+.sa-icon.sa-success .sa-line.sa-tip {
+  -ms-transform: rotate(45deg) \9;
+}
+.sa-icon.sa-success .sa-line.sa-long {
+  -ms-transform: rotate(-45deg) \9;
+}
+
+.animateSuccessTip {
+  -webkit-animation: animateSuccessTip 0.75s;
+  animation: animateSuccessTip 0.75s;
+}
+
+.animateSuccessLong {
+  -webkit-animation: animateSuccessLong 0.75s;
+  animation: animateSuccessLong 0.75s;
+}
+
+@-webkit-keyframes animateSuccessLong {
+  0% {
+    width: 0;
+    right: 46px;
+    top: 54px;
+  }
+  65% {
+    width: 0;
+    right: 46px;
+    top: 54px;
+  }
+  84% {
+    width: 55px;
+    right: 0px;
+    top: 35px;
+  }
+  100% {
+    width: 47px;
+    right: 8px;
+    top: 38px;
+  }
+}
+@-webkit-keyframes animateSuccessTip {
+  0% {
+    width: 0;
+    left: 1px;
+    top: 19px;
+  }
+  54% {
+    width: 0;
+    left: 1px;
+    top: 19px;
+  }
+  70% {
+    width: 50px;
+    left: -8px;
+    top: 37px;
+  }
+  84% {
+    width: 17px;
+    left: 21px;
+    top: 48px;
+  }
+  100% {
+    width: 25px;
+    left: 14px;
+    top: 45px;
+  }
+}
+@keyframes animateSuccessTip {
+  0% {
+    width: 0;
+    left: 1px;
+    top: 19px;
+  }
+  54% {
+    width: 0;
+    left: 1px;
+    top: 19px;
+  }
+  70% {
+    width: 50px;
+    left: -8px;
+    top: 37px;
+  }
+  84% {
+    width: 17px;
+    left: 21px;
+    top: 48px;
+  }
+  100% {
+    width: 25px;
+    left: 14px;
+    top: 45px;
+  }
+}
+
+@keyframes animateSuccessLong {
+  0% {
+    width: 0;
+    right: 46px;
+    top: 54px;
+  }
+  65% {
+    width: 0;
+    right: 46px;
+    top: 54px;
+  }
+  84% {
+    width: 55px;
+    right: 0px;
+    top: 35px;
+  }
+  100% {
+    width: 47px;
+    right: 8px;
+    top: 38px;
+  }
+}
+
+.sa-icon.sa-success .sa-line {
+  height: 5px;
+  background-color: #4CAF50;
+  display: block;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 2;
+}
+
+.sa-icon.sa-success .sa-line.sa-tip {
+  width: 25px;
+  left: 14px;
+  top: 46px;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.sa-icon.sa-success .sa-line.sa-long {
+  width: 47px;
+  right: 8px;
+  top: 38px;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+@-webkit-keyframes rotatePlaceholder {
+  0% {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  5% {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  12% {
+    transform: rotate(-405deg);
+    -webkit-transform: rotate(-405deg);
+  }
+  100% {
+    transform: rotate(-405deg);
+    -webkit-transform: rotate(-405deg);
+  }
+}
+@keyframes rotatePlaceholder {
+  0% {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  5% {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  12% {
+    transform: rotate(-405deg);
+    -webkit-transform: rotate(-405deg);
+  }
+  100% {
+    transform: rotate(-405deg);
+    -webkit-transform: rotate(-405deg);
+  }
+}
+
+  </style>
+
+ </head>
+ <body>
+
+
+
+<script>
+$("button").click(function() {
+  $(".sa-success").addClass("hide");
+  setTimeout(function() {
+    $(".sa-success").removeClass("hide");
+  }, 10);
+});
+  
+</script>
+ </body>
+ </html> 

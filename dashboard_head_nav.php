@@ -120,11 +120,8 @@ li.dropdown {
 <img src="nttf.jpg" title="Nettur Technical Training Foundation" alt="Nettur Technical Training Foundation" height="30px">
 <div class="topnav">
     <a href="dashboard_body.php" target="body" >Home </a>
-  <a href="select_dept_for_allocation.php" target="body">Allocate</a>
-  <a href="select_dept_for_deallocation.php" target="body">De-Allocate</a>
+  <a href="select_date_for_overview.php" target="body">Overview</a>
   <a href="select_year_for_time_table.php" target="body">Time Table</a>
-  <a href="spot_allocation.php" target="body">Spot Allocation</a>
-  <a href="dofi_options.php" target="body">DOFI</a>
 
   <a href="select_resource_for_load_chart.php" target="body" >Load Chart</a>
 <a href="maindb.php" target="body" id="help">About</a>

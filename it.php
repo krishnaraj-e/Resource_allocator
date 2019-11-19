@@ -61,11 +61,11 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 </head>
 <body>
 
-<p>SELECT THE YEAR</p>
+<h1>SELECT THE YEAR</h1>
 
 
 	<center>
-		<br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br>
 	<form method="GET" action="select_date.php">
 			<button class="button" name="b" onclick="window.location.href='?b=1'" value="1"><span>1ST<BR> YEAR </span></button>&nbsp;&nbsp;&nbsp;
 			<button class="button" name="b" onclick="window.location.href='?b=2'" value="2"><span>2ND<BR> YEAR </span></button>&nbsp;&nbsp;&nbsp;

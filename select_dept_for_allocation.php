@@ -61,11 +61,11 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 </head>
 <body>
 
-<p>SELECT THE DEPARTMENT</p>
+<h1>SELECT THE DEPARTMENT</h1>
 
 
 	<center>
-		<br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br>
 	<form method="GET" action="it.php">
 			<button class="button" name="b" onclick="window.location.href='?b=1'" value="1"><span>CP<BR>09 </span></button>&nbsp;&nbsp;&nbsp;
 			<button class="button" name="b" onclick="window.location.href='?b=2'" value="2"><span>CP<BR>08</span></button>&nbsp;&nbsp;&nbsp;
@@ -76,3 +76,5 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 
     </form>
 </center>
+</body>
+</html>

@@ -68,7 +68,7 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 </head>
 <body>
 
-<p> SELECT THE DEPARTMENT</p>
+<h1> SELECT THE DEPARTMENT</h1>
 
 
 	<center>
@@ -83,7 +83,6 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 </center>
 
 <div class="footer">
-  <p>&copy;Created By PEGASUS|QC 2018</p>
 </div>
 
 </body>

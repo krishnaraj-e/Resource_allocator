@@ -209,7 +209,7 @@ button:hover, a:hover {
 
 
 <div class="footer">
-  <p>&copy;Created By PEGASUS|QC 2018</p>
+  
 </div>
 </body>
 </html>

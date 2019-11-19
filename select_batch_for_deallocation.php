@@ -81,7 +81,6 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 </center>
 
 <div class="footer">
-  <p>&copy;Created By PEGASUS|QC 2018</p>
 </div>
 
 </body>

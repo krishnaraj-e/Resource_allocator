@@ -68,11 +68,11 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 </head>
 <body>
 
-<p> SELECT THE BATCH</p>
+<h1> SELECT THE BATCH</h1>
 
 
 	<center>
-		<br><br><br><br><br>
+		<br><br><br><br>
 	<form method="GET" action="select_date.php">
 			<button class="button" name="b" onclick="window.location.href='?b=1'" value="1"><span>A<</span></button>&nbsp;&nbsp;&nbsp;
 			<button class="button" name="b" onclick="window.location.href='?b=2'" value="2"><span>B</span></button>&nbsp;&nbsp;&nbsp;
@@ -81,7 +81,6 @@ if(!isset($_SESSION['user']) || empty($_SESSION['user']))
 </center>
 
 <div class="footer">
-  <p>&copy;Created By PEGASUS|QC 2018</p>
 </div>
 
 </body>
